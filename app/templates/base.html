@@ -2,16 +2,17 @@
 <html lang="en">
 	<head>
 		{% if title %}
-		<title>{{ title }} - Microblog</title>
+		<title>{{ title }} - Klotski</title>
 		{% else %}
-		<title>Microblog</title>
+		<title>Klotski</title>
 		{% endif %}
 	<link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">	
 	</head>
 	<body>
-		<div>Microblog: <a href="/index">Home</a></div>
+		<div>Klotski: <a href="/index">Home</a></div>
 		<hr>
-		{% block content %}{% endblock %}
+		{% block content %}
+		{% endblock %}
 	</body>
 </html>
 
