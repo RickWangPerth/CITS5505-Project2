@@ -1,3 +1,4 @@
+from turtle import title
 from flask import render_template, flash, redirect, url_for
 from app import app
 from app.forms import LoginForm
@@ -13,7 +14,7 @@ from app.forms import RegistrationForm
 
 @app.route('/')
 @app.route('/index')
-@login_required
+# @login_required
 def index():
     return render_template("index.html", title="Home")
 
@@ -52,3 +53,9 @@ def register():
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
+@app.route('/game')
+@login_required
+def game():
+    return render_template("game.html", title="Game")
+
