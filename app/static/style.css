@@ -1,5 +1,17 @@
 #main {
-	margin-top: 4rem;
+	/* margin-top: 4rem; */
+	margin-bottom: 4rem;
+	
+}
+
+.alert {
+    position:relative;
+    border: 1px solid transparent;
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+    border-radius: 5px;
+	margin-top: 10px;
 }
 
 footer {
