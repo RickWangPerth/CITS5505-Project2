@@ -18,6 +18,8 @@
   </head>
 
   <body>
+
+    <!-- Navbar -->
     
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
       <div class="container">
@@ -34,7 +36,7 @@
             <li class="nav-item">
               <a class="nav-link disabled"> Game</a>
             </li>
-            <li class="nav-item text-end">
+            <li class="nav-item">
               <a class="nav-link" href="{{ url_for('login') }}">Login</a>
             </li>
             <li class="nav-item">
@@ -72,5 +74,18 @@
       {% block content %} 
       {% endblock %}
     </div>
+
+    <!-- Footer -->
+
+    <footer class="container">
+      <div>
+        <ul>
+          © Copyright <br>
+          Design by
+          <a >Grace & Rick</a>
+        </ul>
+      </div>
+    </footer>
+
   </body>
 </html>
