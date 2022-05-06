@@ -1,4 +1,25 @@
-div.header {
-	background-color: palegreen;
-	padding: 5px;
+#main {
+	/* margin-top: 4rem; */
+	margin-bottom: 4rem;
+	
 }
+
+.alert {
+    position:relative;
+    border: 1px solid transparent;
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+    border-radius: 5px;
+	margin-top: 10px;
+}
+
+footer {
+	padding-top: 20px;
+	margin-bottom: 10px;
+	color: #303030;
+	font-size: 14px;
+	text-align: center;
+	position: relative;
+	margin-right: 5%;
+  }
