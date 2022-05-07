@@ -1,0 +1,50 @@
+.div1{
+    width:312px;
+    height: 312px;
+    background-color: #6C6C6C;
+    margin-left:550px;
+}
+
+.div2{
+    width:100px;
+    height: 100px;
+    float: left;
+    margin-left: 3px;
+    margin-top: 3px;
+    background-color: #FFA042;
+    text-align: center;
+    font-size: 80px;
+    color: #842B00;
+}
+
+.div3{
+    margin-top: 20px;
+    width:512px;
+    height: 80px;
+    /*border: solid;*/
+    border-color: #000000;
+    text-align: center;
+    margin-left:450px;
+    
+}
+
+.buttonStyle{
+    width:150px;
+    height: 50px;
+    font-size: 30px;
+    margin-top: 15px;
+    border-radius: 5%;
+    background-color: #97CBFF;
+}
+
+.timeText{
+    margin-left: 60px;
+    font-size: 30px;
+}
+
+.inputStyle{
+    float: auto;
+    width:100px;
+    height: 30px;
+    font-size: 30px;
+}
