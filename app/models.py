@@ -21,3 +21,15 @@ class User(UserMixin, db.Model):
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
+class Rank(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    time = db.Column(db.Integer, index=True)
+    moves = db.Column(db.Integer, index=True)
+
+    def __repr__(self):
+        return '[User:{}, Time:{}, Moves:{}]'.format(\
+        self.user_id,\
+        self.time,\
+        self.moves)
