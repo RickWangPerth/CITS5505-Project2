@@ -1,7 +1,5 @@
 'use strict'
 
-
-
     var numArray = new Array(9);
 	var numbase = Array(4).fill(Array(9));
 	var divObjArray = new Array(9);
@@ -12,6 +10,8 @@
 
 	var startButton = document.getElementById("startButton");
 	var timer;
+	var moves = 0;
+	var moveText = document.getElementById("moves");
 	var curTime = 0;
 	var timeText = document.getElementById("outputTime");
 	var promptText = document.getElementById("promptText");
@@ -153,10 +153,13 @@
 	}
 
 	// 下标为0的格子的单击响应函数
+	moveText.value=moves;
 	divObjArray[0].onclick = function() {
 		updateEmptyFun();
 		if(emptyIndex == 1 || emptyIndex == 3) {
 			updatePositionFun(0);
+			moves++;
+			moveText.value=moves;
 		}
 	}
 
@@ -165,6 +168,8 @@
 		updateEmptyFun();
 		if(emptyIndex == 1 || emptyIndex == 5) {
 			updatePositionFun(2);
+			moves++;
+			moveText.value=moves;
 		}
 	}
 
@@ -173,6 +178,8 @@
 		updateEmptyFun();
 		if(emptyIndex == 3 || emptyIndex == 7) {
 			updatePositionFun(6);
+			moves++;
+			moveText.value=moves;
 		}
 	}
 
@@ -181,6 +188,8 @@
 		updateEmptyFun();
 		if(emptyIndex == 5 || emptyIndex == 7) {
 			updatePositionFun(8);
+			moves++;
+			moveText.value=moves;
 		}
 	}
 
@@ -194,6 +203,8 @@
 					curIndex = divObjArray.indexOf(this);
 					if(emptyIndex == curIndex - 1 || emptyIndex == curIndex + 1 || emptyIndex == curIndex + 3) {
 						updatePositionFun(curIndex);
+						moves++;
+						moveText.value=moves;
 					}
 				}
 				continue;
@@ -204,6 +215,8 @@
 					curIndex = divObjArray.indexOf(this);
 					if(emptyIndex == curIndex - 1 || emptyIndex == curIndex + 1 || emptyIndex == curIndex - 3) {
 						updatePositionFun(curIndex);
+						moves++;
+						moveText.value=moves;
 					}
 				}
 				continue;
@@ -214,6 +227,8 @@
 					curIndex = divObjArray.indexOf(this);
 					if(emptyIndex == curIndex - 3 || emptyIndex == curIndex + 3 || emptyIndex == curIndex + 1) {
 						updatePositionFun(curIndex);
+						moves++;
+						moveText.value=moves;
 					}
 				}
 				continue;
@@ -224,6 +239,8 @@
 					curIndex = divObjArray.indexOf(this);
 					if(emptyIndex == curIndex - 3 || emptyIndex == curIndex + 3 || emptyIndex == curIndex - 1) {
 						updatePositionFun(curIndex);
+						moves++;
+						moveText.value=moves;
 					}
 				}
 				continue;
@@ -233,10 +250,13 @@
 				curIndex = divObjArray.indexOf(this);
 				if(emptyIndex == curIndex - 3 || emptyIndex == curIndex + 3 || emptyIndex == curIndex - 1 || emptyIndex == curIndex + 1) {
 					updatePositionFun(curIndex);
+					moves++;
+					moveText.value=moves;
 				}
 			}
 
 		}
+	
 	}
 	resFun();
 
