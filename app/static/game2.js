@@ -3,6 +3,7 @@
 
 
     var numArray = new Array(9);
+	var numbase = Array(4).fill(Array(9));
 	var divObjArray = new Array(9);
 	for(var i = 0; i < divObjArray.length; i++) {
 		numArray[i] = i + 1;
@@ -24,10 +25,17 @@
 		startButton.innerHTML = "in game...";
 		startButton.style.backgroundColor = "#FF7575";
 
-		// 随机分布1~25数字所在位置
-		numArray.sort(function() {
-			return Math.random() > 0.5 ? -1 : 1;
-		});
+		// 随机分布1~9数字所在位置
+		numbase=[[6,1,2,5,3,8,9,7,4],[6,1,2,5,9,3,8,7,4],[6,1,2,5,3,8,7,4,9], [6,1,9,2,5,3,8,7,4]];
+
+
+		function random_item(items) {
+			return items[Math.floor(Math.random()*items.length)];
+		}
+        numArray = random_item(numbase);
+
+
+
 		//console.log (numArray[1]);
 		//console.log (numArray[3]);
 		//console.log (divObjArray[1]);
