@@ -1,15 +1,125 @@
-{% extends "base.html" %}
-
-{% block content %}
-
-{% if current_user.is_anonymous %}
-<h1 class="fs-2 fw-bolder">Welcome to klotski !</h1>
+{% extends "base.html" %} {% block content %} {% if current_user.is_anonymous %}
+<h1 class="fs-2 fw-bolder" style="margin-top: 1rem;">Welcome to klotski !</h1>
 {% else %}
-<h1>Hi, {{ current_user.username }}!</h1>
+<h1 class="fs-2 fw-bolder" style="margin-top: 1rem;">Hi, {{ current_user.username }} !</h1>
 {% endif %}
 
-<h2 class="fs-4">What is klotski </h2>
+<h2 class="fs-4">What is klotski</h2>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <p>
+        Klotski is a sliding block puzzle thought to have originated in the
+        early 20th century. The name in a more global sense to refer to a whole
+        group of similar sliding-block puzzles where the aim is to move a
+        specific block to some predefined location.
+      </p>
+      <p>
+        For the original Klotski puzzle, the largest block must be moved to the
+        bottom middle location so that it can be slid over the border, without
+        any of the other blocks being removed in this way.
+      </p>
+    </div>
+
+    <div class="col-sm-4">
+      <img
+        id="puzzle1"
+        class="img-thumbnail"
+        src="{{ url_for('static',filename='./images/puzzle1.jpeg') }}"
+        alt="Klotski puzzle"
+      />
+      <p class="image-text">Klotski puzzle</p>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div>
+    <p>
+      It is still unknown which version of the puzzle is the original. However,
+      the early cognate of Klotski closest in design dates to 1909 in Chicago.
+    </p>
+    <p>
+      Nowadays, there are several variations of this game. Some changes names
+      specific to the culture of country, like Huarong Dao (China) and L'âne
+      rouge (France); Some with different arrangement of blocks, like Pennant
+      Puzzle and Ma's Puzzle.
+    </p>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <img
+        id="puzzle2"
+        class="img-thumbnail"
+        src="{{ url_for('static',filename='./images/puzzle2.jpeg') }}"
+        alt="Huarong Dao"
+      />
+      <p class="image-text">Huarong Dao</p>
+    </div>
+    <div class="col-sm-3">
+      <img
+        id="puzzle2"
+        class="img-thumbnail"
+        src="{{ url_for('static',filename='./images/puzzle3.jpeg') }}"
+        alt="L'âne rouge"
+      />
+      <p class="image-text">L'âne rouge</p>
+    </div>
+    <div class="col-sm-3">
+      <img
+        id="puzzle3"
+        class="img-thumbnail"
+        src="{{ url_for('static',filename='./images/puzzle4.png') }}"
+        alt="Pennant Puzzle"
+      />
+      <p class="image-text">Pennant Puzzle</p>
+    </div>
+    <div class="col-sm-3">
+      <img
+        id="puzzle2"
+        class="img-thumbnail"
+        src="{{ url_for('static',filename='./images/puzzle5.png') }}"
+        alt="Ma's Puzzle"
+      />
+      <p class="image-text">Ma's Puzzle</p>
+    </div>
+  </div>
+  <div>
+    <p>
+      And with the development of the Internet, the game was also moved to the
+      computer screen, we can play anytime, anywhere with anybody. The most
+      popular one is called n puzzle. Our puzzle is focus on this kind of game.
+    </p>
+  </div>
+</div>
 
 <h2 class="fs-4">How to Play</h2>
+
+<div class="container">
+  <p>
+    N puzzle is a sliding puzzle having n square tiles numbered 1-n in a frame,
+    leaving one unoccupied tile position. The goal of the puzzle is to place the
+    tiles in numerical order.
+  </p>
+  <h3 class="fs-5">Example of 8 puzzle</h3>
+  <div class="row">
+    <div class="col-sm-6 offset-sm-3">
+        <img
+          id="puzzle4"
+          alt="Example of puzzle"
+          class="img-thumbnail"
+          src="https://miro.medium.com/max/508/1*YxeZJzfhW4kn5O5wAGbkIg.gif"
+          role="presentation"      
+        />
+        <P class="image-text">
+            <a href="https://github.com/AlexP11223/EightPuzzleSolver" target="_blank">Image source</a>  
+        </P>
+      </div>
+
+  </div>
+  
+  
+</div>
 
 {% endblock %}
