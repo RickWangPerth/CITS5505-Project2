@@ -15,11 +15,59 @@
 }
 
 footer {
-	padding-top: 20px;
-	margin-bottom: 10px;
-	color: #303030;
+	position: fixed;
+    padding: 10px 10px 0px 10px;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
 	font-size: 14px;
 	text-align: center;
-	position: relative;
-	margin-right: 5%;
+
   }
+
+#puzzle1 {
+	max-width: 80%;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+	height:10rem;
+}
+
+#puzzle2 {
+	/* max-width: 90%; */
+	height: 10rem;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#puzzle3 {
+	max-width: 90%;
+	height: 10rem;
+	width: 10rem;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.image-text {
+	margin-top: 10px;
+	text-align: center;
+	font-size: small;
+}
+
+
+
+a:visited {
+	color:dimgray;
+}
+
+
+
+#puzzle4 {
+	margin-top: 1rem;
+	height: 15rem;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;	
+}
