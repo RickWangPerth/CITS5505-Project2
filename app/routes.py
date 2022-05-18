@@ -1,11 +1,11 @@
-from turtle import title
 from flask import render_template, flash, redirect, url_for
 from app import app, db
 from app.forms import LoginForm, RegistrationForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, Rank
 from flask import request
 from werkzeug.urls import url_parse
+from datetime import date
 
 
 @app.route('/')
@@ -60,4 +60,17 @@ def game():
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     return render_template('user.html', user=user, title="Profile")
+
+
+@app.route('/is_play_today/', methods=['GET', 'POST'])
+@login_required
+def is_play_today():
+    print(current_user.id)
+    today = date.today()
+    rank_today = Rank.query.filter(Rank.user_id==current_user.id, db.func.date(Rank.timestamp)==today).first()
+    if rank_today is None:
+        return "False"
+    return "True"    
+
+  
 
