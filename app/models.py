@@ -2,6 +2,7 @@ from app import db
 from app import login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from sqlalchemy.sql import func
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -25,11 +26,12 @@ def load_user(id):
 class Rank(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    time = db.Column(db.Integer, index=True)
+    seconds = db.Column(db.Integer, index=True)
     moves = db.Column(db.Integer, index=True)
+    timestamp = db.Column(db.DateTime(timezone=True), server_default=func.now())
 
     def __repr__(self):
         return '[User:{}, Time:{}, Moves:{}]'.format(\
         self.user_id,\
-        self.time,\
+        self.seconds,\
         self.moves)

@@ -1,34 +1,111 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
 
-{% block content %}
-
-<h1 class="fs-2 fw-bolder" style="margin-top: 1rem;">Hi, {{ current_user.username }} !</h1>
+<h1 class="fs-2 fw-bolder" style="margin-top: 1rem">
+  Hi, {{ current_user.username }} !
+</h1>
 <link rel="stylesheet" href="{{ url_for('static', filename='game2.css') }}" />
 
-<div class="div3">
-    <span style="font-size: 50px;color: #D94600;" id="promptText">Aim</span>
-</div>
-<div class="div1">
-    <div class="div2" id="index_0">1</div>
-    <div class="div2" id="index_1">2</div>
-    <div class="div2" id="index_2">3</div>
-    <div class="div2" id="index_3">4</div>
-    <div class="div2" id="index_4">5</div>
-    <div class="div2" id="index_5">6</div>
-    <div class="div2" id="index_6">7</div>
-    <div class="div2" id="index_7">8</div>
-    <div class="div2" style="background-color: #6C6C6C;" id="index_8"></div>
-</div>
-<div class="div3">
-    <button class="buttonStyle" id="startButton" name="button" value="StartButton">Start</button>
-    <span class="timeText">time</span>
-    <input class="inputStyle" type="text" name="outputTime" id="outputTime" value="" readonly="readonly" />
-    <span class="timeText" style="margin-left: 0px;">s</span>
-    <span class="timeText">Moves</span>
-    <input class="inputStyle" type="text" name="moves" id="moves" value="" readonly="readonly" />
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 offset-sm-3">
+      <div class="div3">
+        <span class="promptText fs-2">8 Puzzle</span>
+      </div>
+      <div class="div1">
+        <div class="div2" id="index_0">1</div>
+        <div class="div2" id="index_1">2</div>
+        <div class="div2" id="index_2">3</div>
+        <div class="div2" id="index_3">4</div>
+        <div class="div2" id="index_4">5</div>
+        <div class="div2" id="index_5">6</div>
+        <div class="div2" id="index_6">7</div>
+        <div class="div2" id="index_7">8</div>
+        <div class="div2" style="background-color: #6c6c6c" id="index_8"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6 offset-sm-3">
+      <div class="scoreboard">
+        <div class="scoreboardItem">
+          <button
+            class="buttonStyle"
+            type="button"
+            name="button"
+            id="startButton"
+            value="StartButton"
+          >
+            Start
+          </button>
+
+          <button
+            class="buttonStyle"
+            type="button"
+            name="button"
+            id="resetButton"
+            value="resetButton"
+          >
+            Reset
+          </button>
+        </div>
+        <div class="scoreboardItem">
+          <input
+            class="scoreboardInput"
+            type="text"
+            name="outputTime"
+            id="outputTime"
+            value="0"
+            readonly="readonly"
+          />
+          <label for="outputTime">Seconds</label>
+        </div>
+        <div class="scoreboardItem">
+          <input
+            class="scoreboardInput"
+            type="text"
+            name="moves"
+            id="moves"
+            value="0"
+            readonly="readonly"
+          />
+          <label for="moves">Moves</label>
+        </div>
+      </div>
+
+      <!-- <div class="div3">
+        <button
+          class="buttonStyle"
+          id="startButton"
+          name="button"
+          value="StartButton"
+        >
+          Start
+        </button>
+        <span class="timeText">Time</span>
+        <input
+          class="inputStyle"
+          type="text"
+          name="outputTime"
+          id="outputTime"
+          value=""
+          readonly="readonly"
+        />
+        <span class="timeText" style="margin-left: 0px">s</span>
+        <span class="timeText">Moves</span>
+        <input
+          class="inputStyle"
+          type="text"
+          name="moves"
+          id="moves"
+          value=""
+          readonly="readonly"
+        />
+      </div> -->
+    </div>
+  </div>
 </div>
 
 {% block javascript %}
-    <script src="{{ url_for('static',filename='game2.js') }}"></script>
-{% endblock %}
-{% endblock %}
+<script src="{{ url_for('static',filename='game2.js') }}"></script>
+{% endblock %} {% endblock %}

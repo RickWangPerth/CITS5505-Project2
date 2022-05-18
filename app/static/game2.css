@@ -1,50 +1,107 @@
-.div1{
-    width:312px;
-    height: 312px;
-    background-color: #6C6C6C;
-    margin-left:550px;
+.div1 {
+  width: 312px;
+  height: 312px;
+  background-color: #6c6c6c;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.div2{
-    width:100px;
-    height: 100px;
-    float: left;
-    margin-left: 3px;
-    margin-top: 3px;
-    background-color: #FFA042;
-    text-align: center;
-    font-size: 80px;
-    color: #842B00;
+.div2 {
+  width: 100px;
+  height: 100px;
+  float: left;
+  margin-left: 3px;
+  margin-top: 3px;
+  background-color: #ffa042;
+  text-align: center;
+  font-size: 80px;
+  color: #842b00;
 }
 
-.div3{
-    margin-top: 20px;
-    width:512px;
-    height: 80px;
-    /*border: solid;*/
-    border-color: #000000;
-    text-align: center;
-    margin-left:450px;
-    
+.div3 {
+  text-align: center;
+  margin-top: 10px;
 }
 
-.buttonStyle{
-    width:150px;
-    height: 50px;
-    font-size: 30px;
-    margin-top: 15px;
-    border-radius: 5%;
-    background-color: #97CBFF;
+.promptText {
+  color: #d94600;
 }
 
-.timeText{
-    margin-left: 60px;
-    font-size: 30px;
+.scoreboard {
+  clear: both;
+  min-height: 100px;
+  margin: 10px auto 0 auto;
+  padding: 10px;
+  text-align: center;
+  font-variant: small-caps;
+  box-sizing: border-box;
+  position: relative;
+  background-color: #ffffff;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  vertical-align: bottom;
 }
 
-.inputStyle{
-    float: auto;
-    width:100px;
-    height: 30px;
-    font-size: 30px;
+.scoreboardItem {
+  display: inline-block;
+  width: 130px;
+  text-align: center;
+  margin: 2px;
+  vertical-align: top;
+  padding: 10px;
 }
+.scoreboardItem button {
+  min-width: 100px;
+}
+
+.scoreboardInput {
+  height: 34px;
+  /*font-size:26px;*/
+  font-size: 2rem;
+  /* font-family: 'Quicksand', 'Open Sans', sans-serif; */
+  font-weight:normal;
+  line-height: 34px;
+  width: 100px;
+  text-align: center;
+  border: 1px solid #fff;
+  border-radius: 0;
+  -webkit-appearance: none;
+  padding: 0;
+  clear: both;
+}
+.scoreboardItem label {
+  clear: both;
+  display: block;
+  color: #666666;
+}
+.buttonStyle {
+  
+  width: auto;
+  margin-bottom: 10px;
+  overflow: visible;
+  padding: 8px 6px 8px 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-block;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 18px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.44), 0 3px 1px -2px rgba(0, 0, 0, 0.5),
+    0 0 2px 0 rgba(0, 0, 0, 0.42);
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  color: #000000;
+}
+
+/* .timeText {
+  margin-left: 60px;
+  font-size: 30px;
+} */
+
+/* .inputStyle {
+  float: auto;
+  width: 100px;
+  height: 30px;
+  font-size: 30px;
+} */
