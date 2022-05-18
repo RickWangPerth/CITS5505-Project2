@@ -15,16 +15,16 @@ The team designs two models: an easy model (8-Puzzle) and a complex model (15-Pu
 
 
 ## How to launch the web application
-**Step One: Register**
-Input the Username & Email & Password and Repeat Password
-The Username and Email must be unique. 
-Then the user gets their account.
+**Step One: Register** <br>
+Input the Username & Email & Password and Repeat Password <br>
+The Username and Email must be unique. <br>
+Then the user gets their account.<br>
 
-**Step Two: Login**
-Use the username and password to sign in to the game.
+**Step Two: Login** <br>
+Use the username and password to sign in to the game.<br>
 Users can tick the Remember Me to record their account information on the website.
 
-**Step Three: Concise History and How to Play**
+**Step Three: Concise History and How to Play** <br>
 To give users a brief introduction to the N-Puzzle game and show them how to play it.
 
 **Step Four: Play the game**
@@ -37,10 +37,10 @@ To give users a brief introduction to the N-Puzzle game and show them how to pla
   <li> When the blocks are in numerical order, user win </li>
 </ul>
 
-**Step Five: Share achievements and check daily improvement**
+**Step Five: Share achievements and check daily improvement** <br>
 Users can click the Statistics in the navigation bar to see their daily progress and share their achievements on the social network.
 
-**Step Six: Compare with other players**
+**Step Six: Compare with other players** <br>
 Users can click the Rank button in the navigation bar to see the top ten player information.
 
 ## Unit tests for the web application
