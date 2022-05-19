@@ -35,3 +35,13 @@ class Rank(db.Model):
         self.user_id,\
         self.seconds,\
         self.moves)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'user_name': str(User.query.get(self.user_id).username),
+            'seconds': self.seconds,
+            'moves': self.moves,
+            "timestamp": str(self.timestamp)
+        }

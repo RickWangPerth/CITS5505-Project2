@@ -190,6 +190,19 @@ function isGameOver() {
   }
   // 游戏通关，弹框告知玩家游戏顺利通关，以及所用时间
   alert("Congratulation! time cost:" + timeText.value + "s");
+
+  $.ajax({
+    url:"/rank",
+    type:"POST",
+    data:JSON.stringify({moves: moves, seconds: timeText.value}),
+    contentType:"application/json; charset=utf-8",
+    dataType:"json",
+    success: function(data){
+      console.log(data)
+    }
+  })
+
+ 
   // 将“开始游戏”按钮复位
   startButton.innerHTML = "Try Tomorrow";
   startButton.style.backgroundColor = "#ffffff";
