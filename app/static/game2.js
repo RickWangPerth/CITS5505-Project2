@@ -21,11 +21,11 @@
 			return;
 		}
 
-		// 更改按钮显示字样，更改按钮颜色
+		// Chage the button after game start
 		startButton.innerHTML = "in game...";
 		startButton.style.backgroundColor = "#FF7575";
 
-		// 随机分布1~9数字所在位置
+		// Set up the puzzle
 		numbase=[[6,1,2,5,3,8,9,7,4],[6,1,2,5,9,3,8,7,4],[6,1,2,5,3,8,7,4,9], [6,1,9,2,5,3,8,7,4]];
 
 
@@ -34,11 +34,6 @@
 		}
         numArray = random_item(numbase);
 
-
-
-		//console.log (numArray[1]);
-		//console.log (numArray[3]);
-		//console.log (divObjArray[1]);
 		for(var i = 0; i < divObjArray.length; i++) {
 			if(numArray[i] == 9) {
 				divObjArray[i].innerHTML = "";
@@ -48,59 +43,36 @@
 			divObjArray[i].innerHTML = numArray[i];
 			divObjArray[i].style.backgroundColor = "#FFA042";
 		}
-		//console.log (numArray[1]);
-		//console.log (numArray[3]);
-		//console.log (divObjArray[1]);
 
-		// 定时器开始计时
+
+		// Start the timer
 		setTimeout(timing, 1000);
 
-		// 同步显示时间文本
+		// Display the time
 		curTime = 0;
 		timeText.value = curTime;
 
-		// 将顶部的“目标图案”字样隐藏
+		// Hile the top txt
 		promptText.style.display = "none";
 
 	}
 
-	// 计时器
+	// Timer
 	function timing() {
 		curTime++;
 		timeText.value = curTime;
 		timer = setTimeout(timing, 1000);
 	}
 
-	/**
-	 * 使用9代表空白格，通过变量emptyIndex存储该值所在格子的下标
-	 * 并声明更新9空白格位置的函数updateEmptyFun
-	 */
+	
+    //Use index 8 to repersent space block and use emptyIndex to store index
 	var emptyIndex = 8;
 
-	// 获取空白格所在下标
+	// Get the space block index 
 	function updateEmptyFun() {
 		emptyIndex = numArray.indexOf(9);
 	}
 	console.log (emptyIndex);
-
-	/**
-	 * 为每一个格子绑定单击响应函数
-	 * 		这些格子按照点击移动时，是否有规律、规律是否一致，可以分为6组
-	 * 		第1组，没有统一规律的一组，下标分别为0,2,6,8的格子
-	 * 		第2组，移动规律为可以移动左、下、右，下标分别为1的格子
-	 * 		第3组，移动规律为可以移动左、上、右，下标分别为7的格子
-	 * 		第4组，移动规律为可以移动上、下、右，下标分别为3的格子
-	 * 		第5组，移动规律为可以移动上、下、左，下标分别为5的格子
-	 * 		第6组，移动规律为可以移动上、下、左、右，下标分别为4的格子
-	 * 
-	 * 将绑定单击响应函数公共部分抽取出来，作为公共函数updatePositionFun，减少冗余代码
-	 * 		公共函数部分包含更新25(即空白格子)在数组numArray中的位置，同时更新格子交换后的颜色、数值
-	 * 
-	 * 在每次位置更新结束之后，需要判断是否已经完成数字排序；方法为isGameOver
-	 * 		若当前空白格未在最后一位，则可直接认为游戏为通关
-	 * 		若当前空白格已经在最后一位，则判断前面的所有数字均按照升序排序
-	 */
-
 
 	 function reversePairs(nums) {
 		let res = 0;
@@ -134,25 +106,25 @@
 		}
 	}
 	
-	// 判断游戏是否通关
+	// Check if win
 	function isGameOver() {
 		for(var i = 0; i < numArray.length; i++) {
 			if(numArray[i] != i + 1) {
 				return;
 			}
 		}
-		// 游戏通关，弹框告知玩家游戏顺利通关，以及所用时间
+		// Win then show thw time cost
 		alert("Congratulation! time cost:" + timeText.value + "s");
-		// 将“开始游戏”按钮复位
+		// Set back to start
 		startButton.innerHTML = "Start";
 		startButton.style.backgroundColor = "#97CBFF";
-		// 将计时器复位
+		// Reset the timer
 		clearTimeout(timer);
-		// 将顶部的“目标图案”字样设置为显示
+		// Show the "Aim"
 		promptText.style.display = "block";
 	}
 
-	// 下标为0的格子的单击响应函数
+	// Response function for block index 0
 	moveText.value=moves;
 	divObjArray[0].onclick = function() {
 		updateEmptyFun();
@@ -163,7 +135,7 @@
 		}
 	}
 
-	// 下标为2的格子的单击响应函数
+	//  Response function for block index 2
 	divObjArray[2].onclick = function() {
 		updateEmptyFun();
 		if(emptyIndex == 1 || emptyIndex == 5) {
@@ -173,7 +145,7 @@
 		}
 	}
 
-	// 下标为6的格子的单击响应函数
+	//  Response function for block index 6
 	divObjArray[6].onclick = function() {
 		updateEmptyFun();
 		if(emptyIndex == 3 || emptyIndex == 7) {
@@ -183,7 +155,7 @@
 		}
 	}
 
-	// 下标为8的格子的单击响应函数
+	//  Response function for block index 8
 	divObjArray[8].onclick = function() {
 		updateEmptyFun();
 		if(emptyIndex == 5 || emptyIndex == 7) {
@@ -193,7 +165,7 @@
 		}
 	}
 
-	// 其他下标的格子的单击响应函数
+	//  Response function for other blocks
 	function resFun() {
 		var curIndex;
 		for(var i = 1; i < divObjArray.length; i++) {
