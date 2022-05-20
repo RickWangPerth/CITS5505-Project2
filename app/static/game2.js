@@ -56,10 +56,7 @@ startButton.onclick = function () {
   if (startButton.innerHTML == "In Game...") {
     return;
   }
-
-
-
-    // 更改按钮显示字样，更改按钮颜色
+    // Change the button after start
     startButton.innerHTML = "In Game...";
     startButton.style.backgroundColor = "#FF7575";
 
@@ -75,10 +72,10 @@ startButton.onclick = function () {
       divObjArray[i].style.backgroundColor = "#FFA042";
     }
 
-    // 定时器开始计时
+    // Start timer
     setTimeout(timing, 1000);
 
-    // 同步显示时间文本
+    // Dispaly the time
     curTime = 0;
     timeText.value = curTime;
     moves = 0;
@@ -112,42 +109,23 @@ resetButton.onclick = function () {
   setTimeout(timing, 1000);
 };
 
-// 计时器
+// Timer
 function timing() {
   curTime++;
   timeText.value = curTime;
   timer = setTimeout(timing, 1000);
 }
 
-/**
- * 使用9代表空白格，通过变量emptyIndex存储该值所在格子的下标
- * 并声明更新9空白格位置的函数updateEmptyFun
- */
+
+// Set 9 to repersent space block store in emptyIndex
 var emptyIndex = 8;
 
-// 获取空白格所在下标
+// Get the space index
 function updateEmptyFun() {
   emptyIndex = numArray.indexOf(9);
 }
 console.log(emptyIndex);
 
-/**
- * 为每一个格子绑定单击响应函数
- * 		这些格子按照点击移动时，是否有规律、规律是否一致，可以分为6组
- * 		第1组，没有统一规律的一组，下标分别为0,2,6,8的格子
- * 		第2组，移动规律为可以移动左、下、右，下标分别为1的格子
- * 		第3组，移动规律为可以移动左、上、右，下标分别为7的格子
- * 		第4组，移动规律为可以移动上、下、右，下标分别为3的格子
- * 		第5组，移动规律为可以移动上、下、左，下标分别为5的格子
- * 		第6组，移动规律为可以移动上、下、左、右，下标分别为4的格子
- *
- * 将绑定单击响应函数公共部分抽取出来，作为公共函数updatePositionFun，减少冗余代码
- * 		公共函数部分包含更新25(即空白格子)在数组numArray中的位置，同时更新格子交换后的颜色、数值
- *
- * 在每次位置更新结束之后，需要判断是否已经完成数字排序；方法为isGameOver
- * 		若当前空白格未在最后一位，则可直接认为游戏为通关
- * 		若当前空白格已经在最后一位，则判断前面的所有数字均按照升序排序
- */
 
 function reversePairs(nums) {
   let res = 0;
@@ -181,27 +159,28 @@ function updatePositionFun(divIndex) {
   }
 }
 
-// 判断游戏是否通关
+// Check if pass
 function isGameOver() {
   for (var i = 0; i < numArray.length; i++) {
     if (numArray[i] != i + 1) {
       return;
     }
   }
-  // 游戏通关，弹框告知玩家游戏顺利通关，以及所用时间
-  alert("Congratulation! time cost:" + timeText.value + "s");
-  // 将“开始游戏”按钮复位
+  // Pass and send message
+  const answer = document.getElementById('answer');
+  answer.innerHTML= "Congratulation! time cost:" + timeText.value + "s" + " moves:" + moveText.value 
+  // Reset the button
   startButton.innerHTML = "Try Tomorrow";
   startButton.style.backgroundColor = "#ffffff";
   startButton.disabled = "disabled";
   resetButton.disabled = "disabled";
-  // 将计时器复位
+  // Resent the timer
   clearTimeout(timer);
-  // 将顶部的“目标图案”字样设置为显示
+  // Display the top test
   promptText.style.display = "block";
 }
 
-// 下标为0的格子的单击响应函数
+// Index 0 response function
 moveText.value = moves;
 divObjArray[0].onclick = function () {
   updateEmptyFun();
@@ -212,7 +191,7 @@ divObjArray[0].onclick = function () {
   }
 };
 
-// 下标为2的格子的单击响应函数
+// Index 2 response function
 divObjArray[2].onclick = function () {
   updateEmptyFun();
   if (emptyIndex == 1 || emptyIndex == 5) {
@@ -222,7 +201,7 @@ divObjArray[2].onclick = function () {
   }
 };
 
-// 下标为6的格子的单击响应函数
+// Index 6 response function
 divObjArray[6].onclick = function () {
   updateEmptyFun();
   if (emptyIndex == 3 || emptyIndex == 7) {
@@ -232,7 +211,7 @@ divObjArray[6].onclick = function () {
   }
 };
 
-// 下标为8的格子的单击响应函数
+// Index 8 response function
 divObjArray[8].onclick = function () {
   updateEmptyFun();
   if (emptyIndex == 5 || emptyIndex == 7) {
@@ -242,7 +221,7 @@ divObjArray[8].onclick = function () {
   }
 };
 
-// 其他下标的格子的单击响应函数
+// Other index response function
 function resFun() {
   var curIndex;
   for (var i = 1; i < divObjArray.length; i++) {
