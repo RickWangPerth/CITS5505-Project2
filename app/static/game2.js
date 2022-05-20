@@ -6,7 +6,8 @@ var is_play_today = false;
 // var numbase = Array(4).fill(Array(9));
 var divObjArray = new Array(9);
 for (var i = 0; i < divObjArray.length; i++) {
-  //   numArray[i] = i + 1;
+  numArray[i] = i + 1;
+  initialArray[i] = i + 1;
   divObjArray[i] = document.getElementById("index_" + i);
 }
 
@@ -83,31 +84,36 @@ startButton.onclick = function () {
   moveText.value = moves;
 };
 
+const arraysEqual = (a1, a2) => {
+  return JSON.stringify(a1) == JSON.stringify(a2);
+};
+
 resetButton.onclick = function () {
   if (startButton.innerHTML == "Start") {
     return;
   }
 
-  startButton.innerHTML = "In Game...";
-  startButton.style.backgroundColor = "#FF7575";
-
   numArray = [...initialArray];
-  for (var i = 0; i < divObjArray.length; i++) {
-    if (initialArray[i] == 9) {
-      divObjArray[i].innerHTML = "";
-      divObjArray[i].style.backgroundColor = "#6C6C6C";
-      continue;
+  if (arraysEqual(numArray, [1, 2, 3, 4, 5, 6, 7, 8, 9])) {
+    alert("Please click start button to start game!");
+  } else {
+    for (var i = 0; i < divObjArray.length; i++) {
+      if (initialArray[i] == 9) {
+        divObjArray[i].innerHTML = "";
+        divObjArray[i].style.backgroundColor = "#6C6C6C";
+        continue;
+      }
+      divObjArray[i].innerHTML = initialArray[i];
+      divObjArray[i].style.backgroundColor = "#FFA042";
     }
-    divObjArray[i].innerHTML = initialArray[i];
-    divObjArray[i].style.backgroundColor = "#FFA042";
-  }
 
-  clearTimeout(timer);
-  curTime = 0;
-  timeText.value = curTime;
-  moves = 0;
-  moveText.value = moves;
-  setTimeout(timing, 1000);
+    clearTimeout(timer);
+    curTime = 0;
+    timeText.value = curTime;
+    moves = 0;
+    moveText.value = moves;
+    setTimeout(timing, 1000);
+  }
 };
 
 // Timer
@@ -139,7 +145,6 @@ function reversePairs(nums) {
   return res;
 }
 
-
 function updatePositionFun(divIndex) {
   if (startButton.innerHTML == "Start") {
     return;
@@ -164,8 +169,8 @@ function isGameOver() {
   }
   var downloadbtn = document.getElementById("save");
   var text = document.createTextNode("Save Result");
-  downloadbtn.style.display = "block"
-  downloadbtn.addEventListener("click", function download () {
+  downloadbtn.style.display = "block";
+  downloadbtn.addEventListener("click", function download() {
     var div = document.getElementById("#capture");
     html2canvas(div).then(function (canvas) {
       var image = canvas
@@ -188,21 +193,21 @@ function isGameOver() {
     "s" +
     " moves:" +
     moveText.value;
+
   // Reset the button
 
   $.ajax({
-    url:"/rank",
-    type:"POST",
-    data:JSON.stringify({moves: moves, seconds: timeText.value}),
-    contentType:"application/json; charset=utf-8",
-    dataType:"json",
-    success: function(data){
-      console.log(data)
-    }
-  })
+    url: "/rank",
+    type: "POST",
+    data: JSON.stringify({ moves: moves, seconds: timeText.value }),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function (data) {
+      console.log(data);
+    },
+  });
 
- 
-  // 将“开始游戏”按钮复位
+  // Change the button after pass
   startButton.innerHTML = "Try Tomorrow";
   startButton.style.backgroundColor = "#ffffff";
   startButton.disabled = "disabled";
