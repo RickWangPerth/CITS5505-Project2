@@ -1,3 +1,4 @@
+from email.policy import default
 from app import db
 from app import login
 #from app import admin
@@ -55,3 +56,9 @@ class Rank(db.Model):
             'moves': self.moves,
             "timestamp": str(self.timestamp)
         }
+
+
+class GamePool(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    
+    created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
