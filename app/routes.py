@@ -44,6 +44,7 @@ def register():
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
+        user.set_adminkey(form.adminkey.data)
         db.session.add(user)
         db.session.commit()
         flash('Congratulations, you are now a registered user!')
@@ -71,8 +72,16 @@ def is_play_today():
     if rank_today is None:
         return "False"
     return "True"    
+    #return 
 
 
+<<<<<<< HEAD
+@app.route('/admin/')
+# @login_required
+def admin():
+    data = User.query.order_by(User.id)
+    return render_template("admin.html", data = data)
+=======
 @app.route('/rank', methods=["POST"])
 @login_required
 def store_rank():
@@ -88,3 +97,4 @@ def store_rank():
     db.session.add(rank)
     db.session.commit()
     return rank.to_dict()
+>>>>>>> main

@@ -26,6 +26,7 @@
 
 .promptText {
   color: #d94600;
+  text-align: center;
 }
 
 .scoreboard {
@@ -93,6 +94,12 @@
   border: 1px solid #000000;
   color: #000000;
 }
+
+#outteroutput{
+  position: absolute;
+
+}
+
 
 /* .timeText {
   margin-left: 60px;

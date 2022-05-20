@@ -1,16 +1,23 @@
 {% extends "base.html" %} {% block content %}
 
 <h1 class="fs-2 fw-bolder" style="margin-top: 1rem">
-  Hi, {{ current_user.username }} !
+  Hi, {{ current_user['username'] }} !
 </h1>
 <link rel="stylesheet" href="{{ url_for('static', filename='game2.css') }}" />
 
-<div class="container">
+<script src="https://superal.github.io/canvas2image/canvas2image.js"></script>
+
+
+<div class="container" id="#capture">
+  <div id="outteroutput">
+    <div id="outputimage"></div> 
+  </div>
   <div class="row">
     <div class="col-sm-6 offset-sm-3">
       <div class="div3">
         <span class="promptText fs-2">8 Puzzle</span>
       </div>
+      <div class="promptText fs-2" id="answer"> </div>
       <div class="div1">
         <div class="div2" id="index_0">1</div>
         <div class="div2" id="index_1">2</div>
@@ -48,6 +55,18 @@
           >
             Reset
           </button>
+
+          <button
+          class="buttonStyle"
+          type="button"
+          name="button"
+          id="save"
+          value="resetButton"
+          style="display: none;"
+        >
+          Save Result
+        </button>
+
         </div>
         <div class="scoreboardItem">
           <input
@@ -107,5 +126,10 @@
 </div>
 
 {% block javascript %}
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
 <script src="{{ url_for('static',filename='game2.js') }}"></script>
+
+
+
+
 {% endblock %} {% endblock %}
