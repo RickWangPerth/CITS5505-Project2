@@ -46,5 +46,3 @@ class Rank(db.Model):
         self.seconds,\
         self.moves)
 
-#admin.add_view(ModelView(User,db.session))
-#admin.add_view(ModelView(Rank,db.session))

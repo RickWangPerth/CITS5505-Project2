@@ -95,6 +95,15 @@
   color: #000000;
 }
 
+#outteroutput{
+  position: absolute;
+
+}
+
+#outputimage{
+  
+}
+
 /* .timeText {
   margin-left: 60px;
   font-size: 30px;

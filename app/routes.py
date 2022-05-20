@@ -72,6 +72,12 @@ def is_play_today():
     if rank_today is None:
         return "False"
     return "True"    
+    #return 
 
-  
 
+@app.route('/admin/')
+# @login_required
+def admin():
+
+    data = User.query.order_by(User.id)
+    return render_template("admin.html", data = data)

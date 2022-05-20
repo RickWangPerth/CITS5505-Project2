@@ -19,6 +19,7 @@ var curTime = 0;
 var timeText = document.getElementById("outputTime");
 var counter = 0;
 const numbase = [
+  [1, 2, 3, 4, 5, 6, 7, 9, 8],
   [6, 1, 2, 5, 3, 8, 9, 7, 4],
   [6, 1, 2, 5, 9, 3, 8, 7, 4],
   [6, 1, 2, 5, 3, 8, 7, 4, 9],
@@ -43,7 +44,7 @@ function check_rank_today() {
     console.log(data, "data");
     if (data === "True") {
       is_play_today = true;
-	  alert("You alreay played today, please come back tomorrow!");
+      alert("You alreay played today, please come back tomorrow!");
       startButton.disabled = "disabled";
       resetButton.disabled = "disabled";
     }
@@ -56,30 +57,30 @@ startButton.onclick = function () {
   if (startButton.innerHTML == "In Game...") {
     return;
   }
-    // Change the button after start
-    startButton.innerHTML = "In Game...";
-    startButton.style.backgroundColor = "#FF7575";
+  // Change the button after start
+  startButton.innerHTML = "In Game...";
+  startButton.style.backgroundColor = "#FF7575";
 
-    numArray = generateRandomNum();
-    initialArray = [...numArray];
-    for (var i = 0; i < divObjArray.length; i++) {
-      if (numArray[i] == 9) {
-        divObjArray[i].innerHTML = "";
-        divObjArray[i].style.backgroundColor = "#6C6C6C";
-        continue;
-      }
-      divObjArray[i].innerHTML = numArray[i];
-      divObjArray[i].style.backgroundColor = "#FFA042";
+  numArray = generateRandomNum();
+  initialArray = [...numArray];
+  for (var i = 0; i < divObjArray.length; i++) {
+    if (numArray[i] == 9) {
+      divObjArray[i].innerHTML = "";
+      divObjArray[i].style.backgroundColor = "#6C6C6C";
+      continue;
     }
+    divObjArray[i].innerHTML = numArray[i];
+    divObjArray[i].style.backgroundColor = "#FFA042";
+  }
 
-    // Start timer
-    setTimeout(timing, 1000);
+  // Start timer
+  setTimeout(timing, 1000);
 
-    // Dispaly the time
-    curTime = 0;
-    timeText.value = curTime;
-    moves = 0;
-    moveText.value = moves;
+  // Dispaly the time
+  curTime = 0;
+  timeText.value = curTime;
+  moves = 0;
+  moveText.value = moves;
 };
 
 resetButton.onclick = function () {
@@ -108,6 +109,7 @@ resetButton.onclick = function () {
   moveText.value = moves;
   setTimeout(timing, 1000);
 };
+//
 
 // Timer
 function timing() {
@@ -116,7 +118,6 @@ function timing() {
   timer = setTimeout(timing, 1000);
 }
 
-
 // Set 9 to repersent space block store in emptyIndex
 var emptyIndex = 8;
 
@@ -124,8 +125,7 @@ var emptyIndex = 8;
 function updateEmptyFun() {
   emptyIndex = numArray.indexOf(9);
 }
-console.log(emptyIndex);
-
+//console.log(emptyIndex);
 
 function reversePairs(nums) {
   let res = 0;
@@ -140,9 +140,8 @@ function reversePairs(nums) {
   return res;
 }
 
-console.log(reversePairs(divObjArray));
-
-console.log(divObjArray[2] > divObjArray[1]);
+//console.log(reversePairs(divObjArray));
+//console.log(divObjArray[2] > divObjArray[1]);
 
 function updatePositionFun(divIndex) {
   if (startButton.innerHTML == "Start") {
@@ -159,6 +158,59 @@ function updatePositionFun(divIndex) {
   }
 }
 
+// function convert2canvas() {
+
+//   var shareContent = document.getElementById("#capture");
+//   var width = shareContent.offsetWidth;
+//   var height = shareContent.offsetHeight;
+//   var canvas = document.createElement("canvas");
+//   var scale = 2;
+
+//   canvas.width = width * scale;
+//   canvas.height = height * scale;
+//   canvas.getContext("2d").scale(scale,scale);
+
+//   var opts = {
+//       scale: scale,
+//       canvas: canvas,
+//       logging: true,
+//       width: width,
+//       height: height,
+//       useCORS: true
+//   };
+
+//   html2canvas(shareContent, opts).then(function (canvas) {
+
+//     var context = canvas.getContext('2d');
+
+//     context.mozImageSmoothingEnabled = false;
+//     context.webkitImageSmoothingEnabled = false;
+//     context.msImageSmoothingEnabled = false;
+//     context.imageSmoothingEnabled = false;
+
+//     var img = Canvas2Image.convertToImage(canvas, canvas.width, canvas.height,imgType);
+//     document.body.appendChild(img);
+
+//     $(img).css({
+//         "width": canvas.width / 2 + "px",
+//         "height": canvas.height / 2 + "px",
+//     })
+//     $(img).attr("id", "img");
+
+//     // 生成一个a超链接元素
+//     var a = document.createElement('a');
+//     // 创建一个单击事件
+//     var event = new MouseEvent('click');
+
+//     // 将a的download属性设置为我们想要下载的图片名称，若name不存在则使用‘下载图片名称’作为默认名称
+//     a.download = name || '下载图片名称';
+//     a.href = img.src;//将img的src值设置为a.href属性，img.src为base64编码值
+
+//     // 触发a的单击事件
+//     a.dispatchEvent(event);
+// });
+// }
+
 // Check if pass
 function isGameOver() {
   for (var i = 0; i < numArray.length; i++) {
@@ -166,9 +218,32 @@ function isGameOver() {
       return;
     }
   }
+  var downloadbtn = document.getElementById("save");
+  var text = document.createTextNode("Save Result");
+  downloadbtn.style.display = "block"
+  downloadbtn.addEventListener("click", function download () {
+    var div = document.getElementById("#capture");
+    html2canvas(div).then(function (canvas) {
+      var image = canvas
+        .toDataURL(canvas)
+        .replace(canvas, "image/octet-stream");
+      var a = document.createElement("A");
+      a.href = image;
+      a.download = "Your result";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+  });
+
   // Pass and send message
-  const answer = document.getElementById('answer');
-  answer.innerHTML= "Congratulation! time cost:" + timeText.value + "s" + " moves:" + moveText.value 
+  const answer = document.getElementById("answer");
+  answer.innerHTML =
+    "Congratulation! time cost:" +
+    timeText.value +
+    "s" +
+    " moves:" +
+    moveText.value;
   // Reset the button
   startButton.innerHTML = "Try Tomorrow";
   startButton.style.backgroundColor = "#ffffff";
