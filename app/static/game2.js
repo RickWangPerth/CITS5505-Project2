@@ -109,7 +109,6 @@ resetButton.onclick = function () {
   moveText.value = moves;
   setTimeout(timing, 1000);
 };
-//
 
 // Timer
 function timing() {
@@ -140,8 +139,6 @@ function reversePairs(nums) {
   return res;
 }
 
-//console.log(reversePairs(divObjArray));
-//console.log(divObjArray[2] > divObjArray[1]);
 
 function updatePositionFun(divIndex) {
   if (startButton.innerHTML == "Start") {
@@ -157,59 +154,6 @@ function updatePositionFun(divIndex) {
     isGameOver();
   }
 }
-
-// function convert2canvas() {
-
-//   var shareContent = document.getElementById("#capture");
-//   var width = shareContent.offsetWidth;
-//   var height = shareContent.offsetHeight;
-//   var canvas = document.createElement("canvas");
-//   var scale = 2;
-
-//   canvas.width = width * scale;
-//   canvas.height = height * scale;
-//   canvas.getContext("2d").scale(scale,scale);
-
-//   var opts = {
-//       scale: scale,
-//       canvas: canvas,
-//       logging: true,
-//       width: width,
-//       height: height,
-//       useCORS: true
-//   };
-
-//   html2canvas(shareContent, opts).then(function (canvas) {
-
-//     var context = canvas.getContext('2d');
-
-//     context.mozImageSmoothingEnabled = false;
-//     context.webkitImageSmoothingEnabled = false;
-//     context.msImageSmoothingEnabled = false;
-//     context.imageSmoothingEnabled = false;
-
-//     var img = Canvas2Image.convertToImage(canvas, canvas.width, canvas.height,imgType);
-//     document.body.appendChild(img);
-
-//     $(img).css({
-//         "width": canvas.width / 2 + "px",
-//         "height": canvas.height / 2 + "px",
-//     })
-//     $(img).attr("id", "img");
-
-//     // 生成一个a超链接元素
-//     var a = document.createElement('a');
-//     // 创建一个单击事件
-//     var event = new MouseEvent('click');
-
-//     // 将a的download属性设置为我们想要下载的图片名称，若name不存在则使用‘下载图片名称’作为默认名称
-//     a.download = name || '下载图片名称';
-//     a.href = img.src;//将img的src值设置为a.href属性，img.src为base64编码值
-
-//     // 触发a的单击事件
-//     a.dispatchEvent(event);
-// });
-// }
 
 // Check if pass
 function isGameOver() {

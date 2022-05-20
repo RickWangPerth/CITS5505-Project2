@@ -78,6 +78,5 @@ def is_play_today():
 @app.route('/admin/')
 # @login_required
 def admin():
-
     data = User.query.order_by(User.id)
     return render_template("admin.html", data = data)
