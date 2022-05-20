@@ -162,6 +162,7 @@ function isGameOver() {
       return;
     }
   }
+<<<<<<< HEAD
   var downloadbtn = document.getElementById("save");
   var text = document.createTextNode("Save Result");
   downloadbtn.style.display = "block"
@@ -189,6 +190,24 @@ function isGameOver() {
     " moves:" +
     moveText.value;
   // Reset the button
+=======
+  // 游戏通关，弹框告知玩家游戏顺利通关，以及所用时间
+  alert("Congratulation! time cost:" + timeText.value + "s");
+
+  $.ajax({
+    url:"/rank",
+    type:"POST",
+    data:JSON.stringify({moves: moves, seconds: timeText.value}),
+    contentType:"application/json; charset=utf-8",
+    dataType:"json",
+    success: function(data){
+      console.log(data)
+    }
+  })
+
+ 
+  // 将“开始游戏”按钮复位
+>>>>>>> main
   startButton.innerHTML = "Try Tomorrow";
   startButton.style.backgroundColor = "#ffffff";
   startButton.disabled = "disabled";
