@@ -72,5 +72,19 @@ def is_play_today():
         return "False"
     return "True"    
 
-  
 
+@app.route('/rank', methods=["POST"])
+@login_required
+def store_rank():
+    user_id = current_user.id
+    print(request.json, 'sss')
+    moves = request.json.get("moves", -1)
+    seconds = request.json.get("seconds", -1)
+    rank = Rank(
+        user_id=user_id,
+        moves=moves,
+        seconds=seconds
+    )
+    db.session.add(rank)
+    db.session.commit()
+    return rank.to_dict()
