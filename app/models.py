@@ -8,12 +8,16 @@ from sqlalchemy.sql import func
 
 from app import admin
 from flask_admin.contrib.sqla import ModelView
+from flask_admin.menu import MenuLink
+from flask import url_for
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    adminkey_hash = db.Column(db.String(128))
+    adminkey = db.Column(db.String(128))
+    ranks = db.relationship('Rank', backref='user', lazy='dynamic')
     
 
     def __repr__(self):
@@ -23,13 +27,12 @@ class User(UserMixin, db.Model):
         self.password_hash = generate_password_hash(password)
 
     def set_adminkey(self, adminkey):
-        self.adminkey_hash = generate_password_hash(adminkey)
+        self.adminkey = adminkey
+        
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    # def check_adminkey(self, adminkey):
-    #     return check_password_hash(self.adminkey_hash, adminkey)
 
 @login.user_loader
 def load_user(id):
@@ -42,11 +45,13 @@ class Rank(db.Model):
     moves = db.Column(db.Integer, index=True)
     timestamp = db.Column(db.DateTime(timezone=True), server_default=func.now())
 
+
     def __repr__(self):
-        return '[User:{}, Time:{}, Moves:{}]'.format(\
+        return '[User:{}, Time:{}, Moves:{}, timestamp:{}]'.format(\
         self.user_id,\
         self.seconds,\
-        self.moves)
+        self.moves,\
+        self.timestamp)
 
     
     def to_dict(self):
@@ -65,7 +70,24 @@ class GamePool(db.Model):
     
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
 
+class RankView(ModelView):
+  column_list = ('id', 'user_id', 'seconds', 'moves', 'timestamp')
 
-admin.add_view(ModelView(User,db.session))
-admin.add_view(ModelView(Rank,db.session))
+class UserView(ModelView):
+    column_list = ('id', 'username', 'email', 'adminkey')
+   
+
+     
+
+
+admin.add_view(UserView(User,db.session))
+admin.add_view(RankView(Rank,db.session))
 admin.add_view(ModelView(GamePool,db.session))
+
+
+
+class MainIndexLink(MenuLink):
+    def get_url(self):
+        return url_for("index")
+
+admin.add_link(MainIndexLink(name="Public Website"))
