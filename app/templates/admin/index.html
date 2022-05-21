@@ -1,0 +1,8 @@
+{% extends 'admin/master.html' %} {% block body %} {% if
+current_user['adminkey'] == 'adminkey' %}
+<h1 class="fs-2 fw-bolder" style="margin-top: 1rem">
+  Admin: {{ current_user.username }}
+</h1>
+{% else %}
+<h1 class="fs-2 fw-bolder">Sorry, you don't have autority</h1>
+{% endif %} {% endblock %}

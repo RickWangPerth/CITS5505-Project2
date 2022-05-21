@@ -12,7 +12,7 @@ from sqlalchemy import desc
 
 
 @app.route('/')
-@app.route('/index')
+@app.route('/index/')
 # @login_required
 def index():
     return render_template("index.html", title="Home")
@@ -88,12 +88,6 @@ def is_play_today():
         return "False"
     return "True"    
 
-
-@app.route('/admin/')
-# @login_required
-def admin():
-    data = User.query.order_by(User.id)
-    return render_template("admin.html", data = data)
 
 @app.route('/rank', methods=["POST"])
 @login_required
