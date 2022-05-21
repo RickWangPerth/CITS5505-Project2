@@ -20,7 +20,7 @@ var curTime = 0;
 var timeText = document.getElementById("outputTime");
 var counter = 0;
 const numbase = [
-  [1, 2, 3, 4, 5, 6, 7, 9, 8],
+  // [1, 2, 3, 4, 5, 6, 7, 9, 8],
   [6, 1, 2, 5, 3, 8, 9, 7, 4],
   [6, 1, 2, 5, 9, 3, 8, 7, 4],
   [6, 1, 2, 5, 3, 8, 7, 4, 9],

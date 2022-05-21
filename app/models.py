@@ -8,6 +8,7 @@ from sqlalchemy.sql import func
 
 from app import admin
 from flask_admin.contrib.sqla import ModelView
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
@@ -42,11 +43,13 @@ class Rank(db.Model):
     moves = db.Column(db.Integer, index=True)
     timestamp = db.Column(db.DateTime(timezone=True), server_default=func.now())
 
+
     def __repr__(self):
-        return '[User:{}, Time:{}, Moves:{}]'.format(\
+        return '[User:{}, Time:{}, Moves:{}, timestamp:{}]'.format(\
         self.user_id,\
         self.seconds,\
-        self.moves)
+        self.moves,\
+        self.timestamp)
 
     
     def to_dict(self):
@@ -65,7 +68,15 @@ class GamePool(db.Model):
     
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
 
+class RankView(ModelView):
+  column_list = ('id', 'user_id', 'seconds', 'moves', 'timestamp')
 
-admin.add_view(ModelView(User,db.session))
-admin.add_view(ModelView(Rank,db.session))
+class UserView(ModelView):
+    column_list = ('id', 'username', 'email')
+
+     
+
+
+admin.add_view(UserView(User,db.session))
+admin.add_view(RankView(Rank,db.session))
 admin.add_view(ModelView(GamePool,db.session))

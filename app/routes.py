@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, session, url_for
 from app import app, db
 from app.forms import LoginForm, RegistrationForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -6,6 +6,9 @@ from app.models import User, Rank, GamePool
 from flask import request
 from werkzeug.urls import url_parse
 from datetime import datetime, timezone
+from sqlalchemy import asc, func, and_
+from sqlalchemy.orm import Session
+from sqlalchemy import desc
 
 
 @app.route('/')
@@ -60,7 +63,19 @@ def game():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    return render_template('user.html', user=user, title="Profile")
+    rank_results = Rank.query.filter_by(user_id=current_user.id)
+    rank = rank_results.order_by(desc(Rank.timestamp)).limit(7).all()
+    todayUTC = datetime.now(timezone.utc).date()
+    print(todayUTC)
+    compare_results = User.query.\
+        join(Rank, User.id==Rank.user_id).\
+        add_columns(User.username, Rank.user_id, Rank.seconds, Rank.moves, Rank.timestamp).\
+        filter(db.func.date(Rank.timestamp)==todayUTC).\
+        order_by(asc(Rank.seconds)).limit(10).all()
+
+    print(compare_results)
+    
+    return render_template('user.html', user=user, rank=rank, compare_results=compare_results, title="Profile")
 
 
 @app.route('/is_play_today/', methods=['GET', 'POST'])
