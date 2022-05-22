@@ -95,6 +95,7 @@ caption {
   padding-top: 0 !important;
   caption-side: top;
   text-align: center !important;
+  margin-top: 10px;
 }
 
 table {

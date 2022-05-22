@@ -197,8 +197,8 @@ function isGameOver() {
 
   // Download function for game results
   downloadbtn.addEventListener("click", function download() {
-    var div = document.getElementById("#capture");
-    html2canvas(div).then(function (canvas) {
+    var capture = document.getElementById("capture");
+    html2canvas(capture).then(function (canvas) {
       var image = canvas
         .toDataURL(canvas)
         .replace(canvas, "image/octet-stream");

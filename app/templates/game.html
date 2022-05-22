@@ -3,12 +3,12 @@
 <h1 class="fs-2 fw-bolder" style="margin-top: 1rem">
   Hi, {{ current_user['username'] }} !
 </h1>
-<link rel="stylesheet" href="{{ url_for('static', filename='game2.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='game.css') }}" />
 
 <script src="https://superal.github.io/canvas2image/canvas2image.js"></script>
 
 
-<div class="container" id="#capture">
+<div class="container" id="capture">
   <div id="outteroutput">
     <div id="outputimage"></div> 
   </div>
@@ -91,43 +91,13 @@
           <label for="moves">Moves</label>
         </div>
       </div>
-
-      <!-- <div class="div3">
-        <button
-          class="buttonStyle"
-          id="startButton"
-          name="button"
-          value="StartButton"
-        >
-          Start
-        </button>
-        <span class="timeText">Time</span>
-        <input
-          class="inputStyle"
-          type="text"
-          name="outputTime"
-          id="outputTime"
-          value=""
-          readonly="readonly"
-        />
-        <span class="timeText" style="margin-left: 0px">s</span>
-        <span class="timeText">Moves</span>
-        <input
-          class="inputStyle"
-          type="text"
-          name="moves"
-          id="moves"
-          value=""
-          readonly="readonly"
-        />
-      </div> -->
     </div>
   </div>
 </div>
 
 {% block javascript %}
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
-<script src="{{ url_for('static',filename='game2.js') }}"></script>
+<script src="{{ url_for('static',filename='game.js') }}"></script>
 
 
 
