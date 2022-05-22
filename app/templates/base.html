@@ -24,7 +24,7 @@
       integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
       crossorigin="anonymous"
     ></script>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
 
@@ -66,9 +66,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('admin.index') }}">Admin</a>
             </li>
-            {% endif %}
-
-            {% endif %}
+            {% endif %} {% endif %}
           </ul>
 
           <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
@@ -110,10 +108,8 @@
     <footer class="navbar-light bg-light">
       <div>
         <ul>
-          © Copyright
-          <br />
-          Design by
-          <a>Grace & Rick</a>
+          <li style="list-style-type: none">© Copyright</li>
+          <li style="list-style-type: none">Design by Grace & Rick</li>
         </ul>
       </div>
     </footer>

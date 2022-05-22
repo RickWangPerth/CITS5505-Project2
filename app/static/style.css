@@ -48,6 +48,20 @@ footer {
   margin-right: auto;
 }
 
+#puzzle6 {
+  height: 10rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#puzzle5 {
+  height: 10rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .image-text {
   margin-top: 10px;
   text-align: center;

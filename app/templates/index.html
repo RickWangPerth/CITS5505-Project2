@@ -1,7 +1,9 @@
 {% extends "base.html" %} {% block content %} {% if current_user.is_anonymous %}
-<h1 class="fs-2 fw-bolder" style="margin-top: 1rem;">Welcome to klotski !</h1>
+<h1 class="fs-2 fw-bolder" style="margin-top: 1rem">Welcome to klotski !</h1>
 {% else %}
-<h1 class="fs-2 fw-bolder" style="margin-top: 1rem;">Hi, {{ current_user.username }} !</h1>
+<h1 class="fs-2 fw-bolder" style="margin-top: 1rem">
+  Hi, {{ current_user.username }} !
+</h1>
 {% endif %}
 
 <h2 class="fs-4">What is klotski</h2>
@@ -59,7 +61,7 @@
     </div>
     <div class="col-sm-3">
       <img
-        id="puzzle2"
+        id="puzzle6"
         class="img-thumbnail"
         src="{{ url_for('static',filename='./images/puzzle3.jpeg') }}"
         alt="L'âne rouge"
@@ -77,7 +79,7 @@
     </div>
     <div class="col-sm-3">
       <img
-        id="puzzle2"
+        id="puzzle5"
         class="img-thumbnail"
         src="{{ url_for('static',filename='./images/puzzle5.png') }}"
         alt="Ma's Puzzle"
@@ -105,21 +107,21 @@
   <h3 class="fs-5">Example of 8 puzzle</h3>
   <div class="row">
     <div class="col-sm-6 offset-sm-3">
-        <img
-          id="puzzle4"
-          alt="Example of puzzle"
-          class="img-thumbnail"
-          src="https://miro.medium.com/max/508/1*YxeZJzfhW4kn5O5wAGbkIg.gif"
-          role="presentation"      
-        />
-        <P class="image-text">
-            <a href="https://github.com/AlexP11223/EightPuzzleSolver" target="_blank">Image source</a>  
-        </P>
-      </div>
-
+      <img
+        id="puzzle4"
+        alt="Example of puzzle"
+        class="img-thumbnail"
+        src="https://miro.medium.com/max/508/1*YxeZJzfhW4kn5O5wAGbkIg.gif"
+      />
+      <p class="image-text">
+        <a
+          href="https://github.com/AlexP11223/EightPuzzleSolver"
+          target="_blank"
+          >Image source</a
+        >
+      </p>
+    </div>
   </div>
-  
-  
 </div>
 
 {% endblock %}
