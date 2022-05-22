@@ -1,4 +1,3 @@
-
 from app import db
 from app import login
 
@@ -71,6 +70,8 @@ class GamePool(db.Model):
     created_at = db.Column(db.DateTime(timezone=True),
                            server_default=func.now())
 
+# Flask admin view customise
+
 
 class RankView(ModelView):
     column_list = ('id', 'user_id', 'seconds', 'moves', 'timestamp')
@@ -96,6 +97,8 @@ class GamePoolView(ModelView):
 admin.add_view(UserView(User, db.session))
 admin.add_view(RankView(Rank, db.session))
 admin.add_view(GamePoolView(GamePool, db.session))
+
+# Falsk admin menulink modify
 
 
 class MainIndexLink(MenuLink):
