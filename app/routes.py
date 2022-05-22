@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, session, url_for
 from app import app, db
 from app.forms import LoginForm, RegistrationForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -6,13 +6,15 @@ from app.models import User, Rank, GamePool
 from flask import request
 from werkzeug.urls import url_parse
 from datetime import datetime, timezone
+from sqlalchemy import asc
+from sqlalchemy import desc
 
 
 @app.route('/')
-@app.route('/index')
-# @login_required
+@app.route('/index/')
 def index():
     return render_template("index.html", title="Home")
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -31,10 +33,12 @@ def login():
         return redirect(next_page)
     return render_template('login.html', title='Sign In', form=form)
 
+
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -51,34 +55,46 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
+
 @app.route('/game')
 @login_required
 def game():
     return render_template("game.html", title="Game")
 
+
 @app.route('/user/<username>')
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    return render_template('user.html', user=user, title="Profile")
+    rank_results = Rank.query.filter_by(user_id=current_user.id)
+    rank = rank_results.order_by(desc(Rank.timestamp)).limit(7).all()
+
+    # user table join rank table and sort by seconds to get top10 daily
+    todayUTC = datetime.now(timezone.utc).date()
+    compare_results = User.query.\
+        join(Rank, User.id == Rank.user_id).\
+        add_columns(User.username, Rank.user_id, Rank.seconds, Rank.moves, Rank.timestamp).\
+        filter(db.func.date(Rank.timestamp) == todayUTC).\
+        order_by(asc(Rank.seconds)).limit(10).all()
+
+    return render_template('user.html', user=user, rank=rank, compare_results=compare_results, title="Profile")
+
+# check whther the Rank database has today game results
 
 
-@app.route('/is_play_today/', methods=['GET', 'POST'])
+@app.route('/is_play_today/', methods=['GET'])
 @login_required
 def is_play_today():
     print(current_user.id)
     todayUTC = datetime.now(timezone.utc).date()
-    rank_today = Rank.query.filter(Rank.user_id==current_user.id,  db.func.date(Rank.timestamp)==todayUTC).first()
+    rank_today = Rank.query.filter(Rank.user_id == current_user.id,  db.func.date(
+        Rank.timestamp) == todayUTC).first()
     if rank_today is None:
         return "False"
-    return "True"    
+    return "True"
 
+#  store game results to Rank database
 
-@app.route('/admin/')
-# @login_required
-def admin():
-    data = User.query.order_by(User.id)
-    return render_template("admin.html", data = data)
 
 @app.route('/rank', methods=["POST"])
 @login_required
@@ -95,3 +111,18 @@ def store_rank():
     db.session.add(rank)
     db.session.commit()
     return rank.to_dict()
+
+# Get the whole gamepool Database
+
+
+@app.route('/gamepool', methods=["GET"])
+@login_required
+def get_game_data():
+    game_row = GamePool.query.all()
+    print(game_row)
+    game_numbase = ""
+    space = " "
+    for n in game_row:
+        game_numbase += n.numbase_array + space
+
+    return game_numbase

@@ -1,9 +1,8 @@
-// 'use strict'
+"use strict";
 
 var numArray = new Array(9);
 var initialArray = new Array(9);
 var is_play_today = false;
-// var numbase = Array(4).fill(Array(9));
 var divObjArray = new Array(9);
 for (var i = 0; i < divObjArray.length; i++) {
   numArray[i] = i + 1;
@@ -19,14 +18,31 @@ var moveText = document.getElementById("moves");
 var curTime = 0;
 var timeText = document.getElementById("outputTime");
 var counter = 0;
-const numbase = [
-  [1, 2, 3, 4, 5, 6, 7, 9, 8],
+var numbase = [
+  // [1, 2, 3, 4, 5, 6, 7, 9, 8],
   [6, 1, 2, 5, 3, 8, 9, 7, 4],
   [6, 1, 2, 5, 9, 3, 8, 7, 4],
   [6, 1, 2, 5, 3, 8, 7, 4, 9],
   [6, 1, 9, 2, 5, 3, 8, 7, 4],
 ];
 
+// Add game date from GamePool database
+function add_numbase() {
+  $.get("/gamepool", function (data) {
+    var game_numbase = data.split(" ");
+    var game_numbase_length = game_numbase.length - 1;
+
+    for (var i = 0; i < game_numbase_length; i++) {
+      numbase.push(JSON.parse("[" + game_numbase[i] + "]"));
+    }
+
+    console.log(numbase);
+  });
+}
+
+add_numbase();
+
+// Function to random choose one numbase per day base date
 const random = () => {
   const date = new Date();
   return (
@@ -39,9 +55,9 @@ function generateRandomNum() {
   return numbase[random()];
 }
 
+// Check if user has played
 function check_rank_today() {
   $.get("/is_play_today/", function (data) {
-    //   const rank_today = JSON.parse(data);
     console.log(data, "data");
     if (data === "True") {
       is_play_today = true;
@@ -54,6 +70,7 @@ function check_rank_today() {
 
 check_rank_today();
 
+// Start button function
 startButton.onclick = function () {
   if (startButton.innerHTML == "In Game...") {
     return;
@@ -62,6 +79,7 @@ startButton.onclick = function () {
   startButton.innerHTML = "In Game...";
   startButton.style.backgroundColor = "#FF7575";
 
+  // Generate array for game
   numArray = generateRandomNum();
   initialArray = [...numArray];
   for (var i = 0; i < divObjArray.length; i++) {
@@ -84,16 +102,20 @@ startButton.onclick = function () {
   moveText.value = moves;
 };
 
+// Check if the two array are the same
 const arraysEqual = (a1, a2) => {
   return JSON.stringify(a1) == JSON.stringify(a2);
 };
 
+// Reset button function
 resetButton.onclick = function () {
   if (startButton.innerHTML == "Start") {
     return;
   }
 
   numArray = [...initialArray];
+
+  // Alert if user firstly click reset button before click start button
   if (arraysEqual(numArray, [1, 2, 3, 4, 5, 6, 7, 8, 9])) {
     alert("Please click start button to start game!");
   } else {
@@ -107,6 +129,7 @@ resetButton.onclick = function () {
       divObjArray[i].style.backgroundColor = "#FFA042";
     }
 
+    // Clear timer and reset time and moves
     clearTimeout(timer);
     curTime = 0;
     timeText.value = curTime;
@@ -130,6 +153,7 @@ var emptyIndex = 8;
 function updateEmptyFun() {
   emptyIndex = numArray.indexOf(9);
 }
+
 //console.log(emptyIndex);
 
 function reversePairs(nums) {
@@ -170,6 +194,8 @@ function isGameOver() {
   var downloadbtn = document.getElementById("save");
   var text = document.createTextNode("Save Result");
   downloadbtn.style.display = "block";
+
+  // Download function for game results
   downloadbtn.addEventListener("click", function download() {
     var div = document.getElementById("#capture");
     html2canvas(div).then(function (canvas) {
@@ -194,8 +220,7 @@ function isGameOver() {
     " moves:" +
     moveText.value;
 
-  // Reset the button
-
+  // Send data to endpoint to store in database
   $.ajax({
     url: "/rank",
     type: "POST",
@@ -212,7 +237,8 @@ function isGameOver() {
   startButton.style.backgroundColor = "#ffffff";
   startButton.disabled = "disabled";
   resetButton.disabled = "disabled";
-  // Resent the timer
+
+  // Clear the timer
   clearTimeout(timer);
 }
 
