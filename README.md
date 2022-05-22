@@ -130,13 +130,8 @@ Run system tests <code> python3 -m test.systemtest </code> <br>
 
  
 ## Commit logs
-Our group set up a log file: <a href="https://github.com/RickWangPerth/CITS5505-Project2/blob/main/logs.md">log.md</a> <br>
+Our group set up a log file: <a href="https://github.com/RickWangPerth/CITS5505-Project2/blob/main/logs.md">logs.md</a> to
+show every member contribute in detailed<br>
 
-by <code>git log -–all –-decorate –-oneline –-graph </code> 
+by <code>git log --all --decorate --graph </code> 
 <br>
-<br>
-and use <code> git log --all --graph --pretty=format:'%C(auto)%h%d %s %C(bold black)(%ar by <%aN>)%Creset' </code> 
- <br>
- <br>
-to create a file: <a href="https://github.com/RickWangPerth/CITS5505-Project2/blob/main/commits_log_author.md">commits_log_author.md</a> to
-show every member contribute in detailed.
